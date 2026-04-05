@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 240px;
+  overflow-y: auto;
+}
+
+.main {
+  margin-left: 260px;
+}
+
+/* 🔥 Logout Button Style */
+.logout-btn {
+  margin-top: 20px;
+  background: #ef4444;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 90%;
+}
+
+.logout-btn:hover {
+  background: #dc2626;
+}
+</style>
+
+<title>Dashboard</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+<!-- 🔐 Protect Page -->
+<script>
+if (!localStorage.getItem("token")) {
+  alert("Please login first");
+  window.location.href = "login.html";
+}
+</script>
+
+<!-- 🌿 Sidebar -->
+<div class="sidebar">
+  <h2>EcoVest 🌱</h2>
+  <a href="dashboard.html">Dashboard</a>
+  <a href="learn.html">Learn</a>
+  <a href="invest.html">Invest</a>
+  <a href="analyzer.html">Analyzer</a>
+  <a href="news.html">News</a>
+
+  <!-- 🚪 Logout -->
+  <button class="logout-btn" onclick="logout()">🚪 Logout</button>
+</div>
+
+<!-- 📊 Main Content -->
+<div class="main fade-in">
+  <h2>Dashboard</h2>
+
+  <div class="card" id="userInfo"></div>
+
+  <div class="card">
+    <h3>Add Investment</h3>
+    <input id="stock" placeholder="Stock (e.g. TSLA)">
+    <input id="amount" type="number" placeholder="Amount">
+    <button onclick="addInvestment()">Add Investment</button>
+  </div>
+
+  <div class="card">
+    <h3>Your Portfolio</h3>
+    <div id="portfolio">
+      <div class="loader-container">
+        <div class="loader"></div>
+      </div>
+    </div>
+  </div>
+
+  <canvas id="chart"></canvas>
+</div>
+
+<script>
+let user = JSON.parse(localStorage.getItem("user"));
+
+if (user) {
+  document.getElementById("userInfo").innerHTML = `
+    <h3>Welcome ${user.name}</h3>
+    <p>Email: ${user.email}</p>
+  `;
+}
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+let chartInstance = null;
+
+// 🔥 Logout Function
+function logout() {
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
+  alert("Logged out successfully!");
+  window.location.href = "../index.html";
+}
+
+// ESG color
+function getEsgClass(score) {
+  if (score >= 70) return "esg-high";
+  if (score >= 40) return "esg-medium";
+  return "esg-low";
+}
+
+// Auto-fill
+window.onload = function () {
+  let selected = localStorage.getItem("selectedInvestment");
+
+  if (selected) {
+    document.getElementById("stock").value = selected;
+    localStorage.removeItem("selectedInvestment");
+  }
+};
+
+// Add Investment
+async function addInvestment() {
+  let user = JSON.parse(localStorage.getItem("user"));
+
+  let stock = document.getElementById("stock").value.trim();
+  let amount = parseFloat(document.getElementById("amount").value);
+
+  if (!stock || !amount || amount <= 0) {
+    alert("Enter valid details");
+    return;
+  }
+
+  document.getElementById("portfolio").innerHTML = `
+    <div class="loader-container">
+      <div class="loader"></div>
+    </div>
+  `;
+
+  let esgRes = await fetch(`http://localhost:5000/api/esg/${stock}`);
+  let esgData = await esgRes.json();
+
+  let esgScore = esgData.totalEsg || Math.floor(Math.random() * 100);
+  let carbon = (100 - esgScore) * amount * 0.1;
+
+  await fetch("http://localhost:5000/api/portfolio/add", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({
+      userId: user.email,
+      name: stock,
+      amount: amount,
+      esgScore: esgScore,
+      carbon: carbon
+    })
+  });
+
+  alert("Investment added!");
+
+  document.getElementById("stock").value = "";
+  document.getElementById("amount").value = "";
+
+  await loadPortfolio();
+  await loadChart();
+}
+
+// Load Portfolio
+async function loadPortfolio() {
+  let user = JSON.parse(localStorage.getItem("user"));
+
+  let res = await fetch(`http://localhost:5000/api/portfolio/${user.email}`);
+  let data = await res.json();
+
+  let html = "";
+  let totalEsg = 0;
+
+  data.forEach(item => {
+    totalEsg += item.esgScore;
+
+    html += `
+      <div class="card fade-in">
+        <h4>${item.name}</h4>
+        <p>Amount: ₹${item.amount}</p>
+        <p>ESG: <span class="${getEsgClass(item.esgScore)}">${item.esgScore}</span></p>
+        <p>Carbon: ${item.carbon.toFixed(2)} kg</p>
+
+        <button onclick="deleteInvestment('${item._id}')">Delete</button>
+      </div>
+    `;
+  });
+
+  document.getElementById("portfolio").innerHTML = html;
+}
+
+// Delete
+async function deleteInvestment(id) {
+  await fetch(`http://localhost:5000/api/portfolio/${id}`, {
+    method: "DELETE"
+  });
+
+  alert("Deleted!");
+  loadPortfolio();
+}
+
+// Chart
+async function loadChart() {
+  let user = JSON.parse(localStorage.getItem("user"));
+
+  let res = await fetch(`http://localhost:5000/api/portfolio/${user.email}`);
+  let data = await res.json();
+
+  let labels = data.map(i => i.name);
+  let values = data.map(i => i.esgScore);
+
+  if (chartInstance) chartInstance.destroy();
+
+  chartInstance = new Chart(document.getElementById("chart"), {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: "ESG Scores",
+        data: values
+      }]
+    }
+  });
+}
+
+loadPortfolio();
+loadChart();
+</script>
+
+</body>
+</html>

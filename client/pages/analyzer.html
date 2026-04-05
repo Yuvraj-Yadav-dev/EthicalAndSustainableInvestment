@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ESG Analyzer</title>
+  <link rel="stylesheet" href="../css/style.css">
+
+  <style>
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      height: 100vh;
+      width: 240px;
+    }
+
+    .main {
+      margin-left: 260px;
+    }
+
+    .logout-btn {
+      margin-top: 20px;
+      background: #ef4444;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 90%;
+    }
+
+    .logout-btn:hover {
+      background: #dc2626;
+    }
+
+    .news-card {
+      margin-top: 10px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .news-img {
+      width: 100px;
+      height: 70px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- 🔐 Protect Page -->
+<script>
+if (!localStorage.getItem("token")) {
+  alert("Please login first");
+  window.location.href = "login.html";
+}
+</script>
+
+<div class="sidebar">
+  <h2>EcoVest 🌱</h2>
+  <a href="dashboard.html">Dashboard</a>
+  <a href="learn.html">Learn</a>
+  <a href="invest.html">Invest</a>
+  <a href="analyzer.html">Analyzer</a>
+  <a href="news.html">News</a>
+
+  <!-- 🚪 Logout -->
+  <button class="logout-btn" onclick="logout()">🚪 Logout</button>
+</div>
+
+<div class="main fade-in">
+  <h2>🌍 ESG + News Analyzer</h2>
+
+  <div class="card">
+    <input id="company" placeholder="Enter Company (e.g. Tesla)">
+    <button onclick="analyze()">Analyze</button>
+  </div>
+
+  <div id="result"></div>
+
+  <canvas id="chart"></canvas>
+
+  <h3>📰 Related News</h3>
+  <div id="news"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+let chartInstance = null;
+
+// 🚪 Logout
+function logout() {
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
+  alert("Logged out!");
+  window.location.href = "../index.html";
+}
+
+function getEsgClass(score) {
+  if (score >= 70) return "esg-high";
+  if (score >= 40) return "esg-medium";
+  return "esg-low";
+}
+
+const NEWS_KEY = "c55e0c5ef864e10a9cd4e0e9cc5c1b86";
+
+async function analyze() {
+  let company = document.getElementById("company").value;
+
+  if (!company) {
+    alert("Enter company name");
+    return;
+  }
+
+  document.getElementById("result").innerHTML = "Loading ESG...";
+  document.getElementById("news").innerHTML = "Loading News...";
+
+  let esgRes = await fetch(`http://localhost:5000/api/esg/${company}`);
+  let esgData = await esgRes.json();
+
+  let total = esgData.totalEsg ?? Math.floor(Math.random() * 100);
+  let env = esgData.environmentScore ?? Math.floor(Math.random() * 100);
+  let soc = esgData.socialScore ?? Math.floor(Math.random() * 100);
+  let gov = esgData.governanceScore ?? Math.floor(Math.random() * 100);
+
+  document.getElementById("result").innerHTML = `
+    <div class="card">
+      <h3>${company.toUpperCase()}</h3>
+      <p>Total ESG: <span class="${getEsgClass(total)}">${total}</span></p>
+      <p>Environment: ${env}</p>
+      <p>Social: ${soc}</p>
+      <p>Governance: ${gov}</p>
+    </div>
+  `;
+
+  if (chartInstance) chartInstance.destroy();
+
+  chartInstance = new Chart(document.getElementById("chart"), {
+    type: "bar",
+    data: {
+      labels: ["Environment", "Social", "Governance"],
+      datasets: [{
+        label: "ESG Breakdown",
+        data: [env, soc, gov]
+      }]
+    }
+  });
+
+  let newsRes = await fetch(
+    `https://gnews.io/api/v4/search?q=${company}&token=${NEWS_KEY}`
+  );
+
+  let newsData = await newsRes.json();
+
+  let html = "";
+
+  if (newsData.articles) {
+    newsData.articles.slice(0,5).forEach(article => {
+      html += `
+        <div class="card news-card">
+          <img class="news-img" src="${article.image || 'https://via.placeholder.com/100'}">
+          <div>
+            <h4>${article.title}</h4>
+            <a href="${article.url}" target="_blank">Read →</a>
+          </div>
+        </div>
+      `;
+    });
+  }
+
+  document.getElementById("news").innerHTML = html;
+}
+</script>
+
+</body>
+</html>
