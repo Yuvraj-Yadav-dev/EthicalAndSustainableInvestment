@@ -10,21 +10,6 @@
 
 ---
 
-## 🚀 Live Demo
-
-> *(Add your deployed link here when available)*
-> 🔗 https://your-ecovest-app-link.com
-
----
-
-## 📸 Screenshots
-
-| Dashboard                          | Analyzer                         | Invest                       |
-| ---------------------------------- | -------------------------------- | ---------------------------- |
-| ![Dashboard](assets/dashboard.png) | ![Analyzer](assets/analyzer.png) | ![Invest](assets/invest.png) |
-
----
-
 ## ✨ Features
 
 ### 🔐 Authentication
@@ -151,14 +136,19 @@ npx nodemon server/server.js
 ```
 EcoVest/
 │
+├── assets/
+│   ├── dashboard.png.png
+│   ├── analyzer.png.png
+│   ├── invest.png.png
+│
 ├── client/
 │   ├── pages/
 │   ├── css/
+│   ├── js/
 │
 ├── server/
 │   ├── models/
 │   ├── routes/
-│   ├── controllers/
 │   └── server.js
 │
 ├── package.json
