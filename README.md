@@ -113,8 +113,8 @@ Database (MongoDB)
 ### 1️⃣ Clone the Repository
 
 ```
-git clone https://github.com/your-username/ecovest.git
-cd ecovest
+git clone https://github.com/your-username/EthicalAndSustainableInvestment.git
+cd EthicalAndSustainableInvestment
 ```
 
 ### 2️⃣ Install Dependencies
