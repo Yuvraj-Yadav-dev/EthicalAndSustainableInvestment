@@ -212,7 +212,10 @@ Traditional platforms focus only on returns, but EcoVest:
 
 ## 👨‍💻 Author
 
-**Siddhant**
+**Siddhantaditiya**
+**Yuvraj**
+**Mayuresh**
+**Dhwani**
 📌 EcoVest Developer
 
 ---
