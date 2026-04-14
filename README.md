@@ -119,6 +119,9 @@ EcoVest follows a 3-tier architecture:
 
 ## 📸 Application Screenshots
 
+### 🌐 Landing Page
+![Landing Page](Landing%20Page.png)
+
 ### 🏠 Dashboard
 ![Dashboard](Dashboard.png)
 
@@ -128,12 +131,8 @@ EcoVest follows a 3-tier architecture:
 ### 💼 Investment Page
 ![Invest](Invest.png)
 
-### 🌐 Landing Page
-![Landing Page](Landing Page.png)
-
 ### 📚 Learn Section
 ![Learn](Learn.png)
-
 ---
 
 ## 🌍 What is ESG?
