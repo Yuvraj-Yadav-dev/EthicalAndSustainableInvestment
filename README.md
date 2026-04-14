@@ -120,13 +120,19 @@ EcoVest follows a 3-tier architecture:
 ## 📸 Application Screenshots
 
 ### 🏠 Dashboard
-![Dashboard](dashboard.png.png)
+![Dashboard](Dashboard.png)
 
 ### 📊 ESG Analyzer
-![Analyzer](analyzer.png.png)
+![Analyzer](Analyzer.png)
 
 ### 💼 Investment Page
-![Invest](invest.png.png)
+![Invest](Invest.png)
+
+### 🌐 Landing Page
+![Landing Page](Landing Page.png)
+
+### 📚 Learn Section
+![Learn](Learn.png)
 
 ---
 
@@ -161,16 +167,16 @@ It encourages users to make informed decisions that align with long-term sustain
 ## 👥 Team Contributions
 
 ### **Yuvraj Yadav**
-Worked on the ESG analyzer, portfolio, and learning modules along with backend development. He implemented the logic for ESG score calculation and ensured proper integration between frontend and backend using Express. His work helped in handling core application functionality and data flow.
+Worked on core analytical and backend components of the project. He developed the ESG analysis functionality, implemented portfolio handling logic, and contributed to the learning module. He also helped in building backend routes and ensuring smooth communication between frontend and database.
 
 ### **Siddhanthaditiyaa Vettakal**
-Developed the dashboard and authentication system including login and registration pages. Also handled the news integration by implementing API calls and displaying dynamic content. Focused on user experience and smooth navigation across the platform.
+Focused on user-facing components like the dashboard and authentication system. Designed and developed login and registration flows and implemented dynamic news fetching using APIs. Also ensured smooth navigation and better user experience across the application.
 
 ### **Dhwani Shetty**
-Built the investment and news pages along with user and portfolio management logic. Worked on handling user data, updating portfolios, and ensuring proper interaction between frontend components and backend APIs.
+Handled the investment and news-related features of the platform. Worked on displaying investment options and managing user portfolio interactions. Also contributed to connecting frontend components with backend APIs for seamless data updates.
 
 ### **Mayuresh Sangale**
-Designed the overall UI using CSS and developed the landing page. Also contributed to authentication and ESG-related scripts. Focused on styling, responsiveness, and improving the visual appeal of the application.
+Designed the overall user interface and layout of the application. Developed the landing page and handled styling across the platform. Also contributed to authentication and ESG-related scripts, ensuring both functionality and visual consistency.
 
 ---
 
