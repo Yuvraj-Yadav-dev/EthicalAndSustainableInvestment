@@ -10,85 +10,121 @@
 
 ---
 
+## 📌 📖 Project Overview
+
+EcoVest is a **full-stack sustainable investment platform** designed to help users invest responsibly by considering **ESG (Environmental, Social, Governance)** factors.
+
+Unlike traditional investment platforms that focus only on profits, EcoVest integrates:
+- ESG score analysis 📊  
+- Portfolio tracking 💼  
+- Sustainable investment options 🌱  
+- Real-time ESG-based news 📰  
+
+The goal is to **align financial growth with environmental and social responsibility**.
+
+---
+
 ## ✨ Features
 
 ### 🔐 Authentication
-
-* Secure Login & Registration
-* Session handling using localStorage
+- Secure Login & Registration  
+- Session handling using localStorage  
 
 ### 📊 ESG Analyzer
-
-* Analyze companies using ESG scores
-* Visualize data with interactive charts (Chart.js)
+- Analyze companies using ESG scores  
+- Visualize data with interactive charts (Chart.js)  
 
 ### 💼 Investment Options
-
-* SIP (Systematic Investment Plans)
-* Medical Insurance Plans
-* ESG Funds
+- SIP (Systematic Investment Plans)  
+- Medical Insurance Plans  
+- ESG Funds  
 
 ### 📈 Portfolio Management
-
-* Add investments
-* Delete investments
-* View ESG score & carbon impact
+- Add investments  
+- Delete investments  
+- View ESG score & carbon impact  
 
 ### 📰 Smart News Feed
-
-* Real-time ESG + Finance news
-* Powered by GNews API
+- Real-time ESG + Finance news  
+- Powered by GNews API  
 
 ### 📚 Learn Section
-
-* ESG concepts explained
-* Accordion UI
-* Interactive quiz with score & progress bar
+- ESG concepts explained  
+- Accordion UI  
+- Interactive quiz with score & progress bar  
 
 ### 🧭 Premium UI/UX
-
-* VS Code–style sidebar navigation
-* Dropdown menus with animation
-* Smooth scrolling + active section highlight
-* Hover effects & transitions
+- VS Code–style sidebar navigation  
+- Dropdown menus with animation  
+- Smooth scrolling + active section highlight  
+- Hover effects & transitions  
 
 ---
 
 ## 🧠 Tech Stack
 
 ### 💻 Frontend
-
-* HTML5
-* CSS3
-* JavaScript (Vanilla JS)
+- HTML5  
+- CSS3  
+- JavaScript (Vanilla JS)  
 
 ### ⚙️ Backend
-
-* Node.js
-* Express.js
+- Node.js  
+- Express.js  
 
 ### 🗄️ Database
-
-* MongoDB (Mongoose)
+- MongoDB (Mongoose)  
 
 ### 📊 Libraries & APIs
-
-* Chart.js (data visualization)
-* GNews API (real-time news)
+- Chart.js (data visualization)  
+- GNews API (real-time news)  
 
 ---
 
 ## 🏗️ System Architecture
 
-```
-Frontend (HTML/CSS/JS)
-        ↓
-REST APIs (Express.js)
-        ↓
-Backend Logic (Node.js)
-        ↓
-Database (MongoDB)
-```
+### 🔍 Architecture Explanation
+
+EcoVest follows a **3-tier architecture**:
+
+1. **Presentation Layer (Frontend)**
+   - Built using HTML, CSS, JS  
+   - Handles UI, user interaction, and API calls  
+
+2. **Application Layer (Backend)**
+   - Node.js + Express.js  
+   - Handles business logic, authentication, ESG processing  
+
+3. **Data Layer (Database)**
+   - MongoDB  
+   - Stores users, portfolios, and investment data  
+
+---
+
+## 🧩 Project Modules
+
+### 1️⃣ Authentication Module
+- User registration & login  
+- Session stored using localStorage  
+
+### 2️⃣ ESG Analyzer Module
+- Calculates ESG scores  
+- Displays results using charts  
+
+### 3️⃣ Investment Module
+- Displays investment options (SIP, insurance, ESG funds)  
+
+### 4️⃣ Portfolio Module
+- Add/remove investments  
+- Track ESG impact  
+
+### 5️⃣ News Module
+- Fetches ESG news using API  
+- Displays real-time updates  
+
+### 6️⃣ Learning Module
+- ESG educational content  
+- Quiz system with scoring  
 
 ---
 
@@ -104,7 +140,7 @@ Database (MongoDB)
 
 ### 🔹 External API
 
-* **GNews API** → Fetch ESG + finance news
+- **GNews API** → Fetch ESG + finance news  
 
 ---
 
@@ -112,48 +148,24 @@ Database (MongoDB)
 
 ### 1️⃣ Clone the Repository
 
-```
-git clone https://github.com/your-username/EthicalAndSustainableInvestment.git
-cd EthicalAndSustainableInvestment
-```
-
 ### 2️⃣ Install Dependencies
-
-```
-npm install
-```
 
 ### 3️⃣ Run the Server
 
-```
-npx nodemon server/server.js
-```
-
 ---
 
-## 📁 Project Structure
+## 📸 Application Screenshots
 
-```
-EcoVest/
-│
-├── assets/
-│   ├── dashboard.png.png
-│   ├── analyzer.png.png
-│   ├── invest.png.png
-│
-├── client/
-│   ├── pages/
-│   ├── css/
-│   ├── js/
-│
-├── server/
-│   ├── models/
-│   ├── routes/
-│   └── server.js
-│
-├── package.json
-└── README.md
-```
+### 🏠 Dashboard
+![Dashboard](assets/dashboard.png.png)
+
+### 📊 ESG Analyzer
+![Analyzer](assets/analyzer.png.png)
+
+### 💼 Investment Page
+![Invest](assets/invest.png.png)
+
+*(Tip: Add login, portfolio, and news screenshots for better presentation)*
 
 ---
 
@@ -161,11 +173,11 @@ EcoVest/
 
 ESG stands for:
 
-* 🌱 Environmental → Climate impact, emissions
-* 👥 Social → Employee welfare, diversity
-* 🏢 Governance → Ethics, transparency
+- 🌱 Environmental → Climate impact, emissions  
+- 👥 Social → Employee welfare, diversity  
+- 🏢 Governance → Ethics, transparency  
 
-👉 It helps investors evaluate companies beyond just profit.
+👉 Helps investors evaluate companies beyond profit.
 
 ---
 
@@ -173,50 +185,70 @@ ESG stands for:
 
 EcoVest was built to address the growing need for **responsible investing**.
 
-Traditional platforms focus only on returns, but EcoVest:
+It aims to:
+- Promote sustainability 🌱  
+- Raise ESG awareness  
+- Help users align money with values  
 
-* Promotes sustainability 🌱
-* Raises ESG awareness
-* Helps users align money with values
+---
+
+## ⚠️ Challenges Faced
+
+- Handling real-time API data integration  
+- Designing a smooth UI/UX across multiple modules  
+- Managing state using Vanilla JavaScript  
+- Implementing authentication using localStorage  
+- Structuring scalable backend APIs  
+
+---
+
+## 👥 Team Contributions
+
+| Member | Contribution |
+|--------|-------------|
+| **Yuvraj Yadav** | analyzer.html, portfolio.html, learn.html, server.js |
+| **Siddhanthaditiyaa Vettakal** | dashboard.html, login.html, register.html, news.js |
+| **Dhwani Shetty** | invest.html, news.html, user.js, portfolio.js |
+| **Mayuresh Sangale** | style.css, index.html, esg.js, auth.js |
 
 ---
 
 ## ⚠️ Limitations
 
-* Uses basic authentication (localStorage)
-* ESG data may be simulated
-* Limited real-time financial data
-* No AI recommendations yet
+- Uses basic authentication (localStorage)  
+- ESG data may be simulated  
+- Limited real-time financial data  
+- No AI recommendations yet  
 
 ---
 
 ## 🚀 Future Enhancements
 
-* 🔐 JWT Authentication
-* 📊 Real-time stock APIs
-* 🤖 AI-based investment suggestions
-* ☁️ Cloud deployment (AWS / Vercel / Render)
-* 📱 Mobile responsive improvements
+- 🔐 JWT Authentication  
+- 📊 Real-time stock APIs  
+- 🤖 AI-based investment suggestions  
+- ☁️ Cloud deployment (AWS / Vercel / Render)  
+- 📱 Improved mobile responsiveness  
 
 ---
 
 ## 🏆 Highlights
 
-* Full-stack project
-* Real-world use case
-* Clean UI/UX (SaaS-style)
-* API integration
-* Data visualization
+- Full-stack project  
+- Real-world use case  
+- Clean UI/UX (SaaS-style)  
+- API integration  
+- Data visualization  
 
 ---
 
 ## 👨‍💻 Author
 
-**Siddhantaditiya**
-**Yuvraj**
-**Mayuresh**
-**Dhwani**
-📌 EcoVest Developer
+**Siddhantaditiya**  
+**Yuvraj**  
+**Mayuresh**  
+**Dhwani**  
+📌 EcoVest Developer Team  
 
 ---
 
@@ -224,9 +256,9 @@ Traditional platforms focus only on returns, but EcoVest:
 
 If you like this project:
 
-👉 Star ⭐ the repository
-👉 Fork 🍴 it
-👉 Share 💬 with others
+👉 Star ⭐ the repository  
+👉 Fork 🍴 it  
+👉 Share 💬 with others  
 
 ---
 
